@@ -1,0 +1,15 @@
+FROM alpine:latest
+
+# Install Tor (no cache + clean up)
+RUN apk add --no-cache tor && \
+    rm -rf /var/cache/apk/*
+
+# Copy tor config
+COPY torrc /etc/tor/torrc
+
+# Expose ports
+EXPOSE 9150
+EXPOSE 53/udp
+
+# Run Tor with provided config, suppress logs
+CMD ["sh", "-c", "tor -f /etc/tor/torrc > /dev/null 2>&1"]

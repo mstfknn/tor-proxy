@@ -24,12 +24,26 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Build and push multi-arch image
+      - name: Build and push Debian (default) image
         uses: docker/build-push-action@v4
         with:
+          context: .
+          file: ./Dockerfile
           push: true
           pull: true
           platforms: linux/amd64,linux/arm64
-          tags: mstfknn/tor-proxy:latest
+          tags: |
+            mstfknn/tor-proxy:latest
+            mstfknn/tor-proxy:debian
           build-args: |
             APT_UPDATED=1
+
+      - name: Build and push Alpine image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile.alpine
+          push: true
+          pull: true
+          platforms: linux/amd64,linux/arm64
+          tags: mstfknn/tor-proxy:alpine
