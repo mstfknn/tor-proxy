@@ -27,22 +27,36 @@ This project provides a Dockerized Tor proxy server that routes your internet tr
 
 ## Usage
 
-### Build the Docker image
+### Build the Docker image (Debian - default)
 ```
 docker build -t tor-proxy .
 ```
 
-### Run the container
+### Run the container (Debian - default)
 ```
-docker run -d --name tor-proxy -p 9050:9050 -p 9053:9053 tor-proxy
+docker run -d --name tor-proxy -p 9150:9150 -p 8853:8853 tor-proxy
 ```
 
-- Port `9050` is for the SOCKS5 proxy
-- Port `9053` is for DNS resolution through Tor
+- Port `9150` is for the SOCKS5 proxy
+- Port `8853` is for DNS resolution through Tor
+
+### Alternative Alpine Build
+
+Alpine is a minimal alternative to the default Debian-based image.
+
+#### Build the Alpine Docker image
+```
+docker build -t tor-proxy:alpine -f Dockerfile.alpine .
+```
+
+#### Run the Alpine container
+```
+docker run -d --name tor-proxy-alpine -p 9150:9150 -p 8853:8853 tor-proxy:alpine
+```
 
 ### Configure Applications
 
-Set your application's SOCKS5 proxy to `localhost:9050`. DNS requests will be routed through Tor automatically via port `9053`.
+Set your application's SOCKS5 proxy to `localhost:9150`. DNS requests will be routed through Tor automatically via port `8853`.
 
 ## Configuration
 
