@@ -28,5 +28,8 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
+          pull: true
           platforms: linux/amd64,linux/arm64
           tags: mstfknn/tor-proxy:latest
+          build-args: |
+            APT_UPDATED=1
