@@ -1,7 +1,10 @@
 FROM debian:stable-slim
 
 # Tor kurulumu
-RUN apt-get update && apt-get install -y tor && \
+RUN apt-get update && \
+    apt-get dist-upgrade -y && \
+    apt-get install -y --no-install-recommends tor && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Tor config
