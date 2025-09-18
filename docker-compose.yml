@@ -1,0 +1,8 @@
+services:
+  tor-proxy:
+    build: .
+    container_name: tor-proxy
+    restart: unless-stopped
+    ports:
+      - "9150:9150"      # SOCKS5 Proxy
+      - "8853:53/udp"    # DNS Proxy

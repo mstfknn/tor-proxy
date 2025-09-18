@@ -1,0 +1,8 @@
+# SOCKS5 Proxy portu
+SocksPort 0.0.0.0:9150
+
+# DNS çözümleme portu
+DNSPort 0.0.0.0:53
+
+# Log tutma (tamamen kapalı)
+Log notice file /dev/null
