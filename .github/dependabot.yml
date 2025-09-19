@@ -1,0 +1,25 @@
+version: 2
+updates:
+  # Docker base image updates (Dockerfile)
+  - package-ecosystem: "docker"
+    directory: "/"           # root dizin, Dockerfile ve Dockerfile.alpine burada
+    schedule:
+      interval: "weekly"     # Her hafta kontrol etsin
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "chore(docker)"
+      include: "scope"
+
+  # GitHub Actions workflow dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/.github/workflows"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "ci"
+    commit-message:
+      prefix: "chore(ci)"
+      include: "scope"
