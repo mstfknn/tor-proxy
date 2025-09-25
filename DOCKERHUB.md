@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://www.torproject.org/static/images/tor-logo/Purple.png" alt="Tor Proxy Logo"/>
+</p>
+
 # tor-proxy
 
 A lightweight, privacy-focused proxy server using Tor network.
