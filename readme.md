@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://www.torproject.org/static/images/tor-logo/Purple.png" alt="Tor Proxy Logo"/>
+</p>
+
 # Tor Proxy with Docker
 
 This project provides a Dockerized Tor proxy server that routes your internet traffic through the Tor network using a SOCKS5 proxy with DNS support.
@@ -75,3 +79,13 @@ This project is licensed under the MIT License.
 
 - 🐳 [Docker Hub Image](https://hub.docker.com/r/mstfknn/tor-proxy)
 - 📦 [GHCR Image](https://ghcr.io/mstfknn/tor-proxy)
+
+## Star History
+
+<a href="https://www.star-history.com/#mstfknn/tor-proxy&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=mstfknn/tor-proxy&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=mstfknn/tor-proxy&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=mstfknn/tor-proxy&type=Date" />
+ </picture>
+</a>
