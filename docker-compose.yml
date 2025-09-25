@@ -1,8 +1,10 @@
+version: "3.9"
+
 services:
   tor-proxy:
-    build: .
+    image: mstfknn/tor-proxy:debian # or ghcr.io/mstfknn/tor-proxy:debian
     container_name: tor-proxy
     restart: unless-stopped
     ports:
-      - "9150:9150"      # SOCKS5 Proxy
-      - "8853:53/udp"    # DNS Proxy
+      - "9150:9150" # SOCKS5 Proxy
+      - "8853:53/udp" # DNS Proxy
