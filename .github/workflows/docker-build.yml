@@ -2,7 +2,6 @@ name: Build and Push Multi-Arch Docker Image
 
 permissions:
   contents: read
-  packages: write
 
 on:
   push:
@@ -28,13 +27,6 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Build and push Debian (default) image
         uses: docker/build-push-action@v6
         with:
@@ -46,8 +38,6 @@ jobs:
           tags: |
             mstfknn/tor-proxy:latest
             mstfknn/tor-proxy:debian
-            ghcr.io/mstfknn/tor-proxy:latest
-            ghcr.io/mstfknn/tor-proxy:debian
           build-args: |
             APT_UPDATED=1
 
@@ -59,6 +49,4 @@ jobs:
           push: true
           pull: true
           platforms: linux/amd64,linux/arm64
-          tags: |
-            mstfknn/tor-proxy:alpine
-            ghcr.io/mstfknn/tor-proxy:alpine
+          tags: mstfknn/tor-proxy:alpine
