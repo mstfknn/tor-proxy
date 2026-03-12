@@ -58,6 +58,16 @@ jobs:
             tags: |
               mstfknn/tor-proxy:alpine
               ghcr.io/mstfknn/tor-proxy:alpine
+          - variant: debian-bridge
+            file: ./Dockerfile.debian-bridge
+            tags: |
+              mstfknn/tor-proxy:debian-bridge
+              ghcr.io/mstfknn/tor-proxy:debian-bridge
+          - variant: alpine-bridge
+            file: ./Dockerfile.alpine-bridge
+            tags: |
+              mstfknn/tor-proxy:alpine-bridge
+              ghcr.io/mstfknn/tor-proxy:alpine-bridge
     steps:
       - name: Checkout code
         uses: actions/checkout@v6

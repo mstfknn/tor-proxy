@@ -22,7 +22,7 @@ docker run -d -p 9150:9150 -p 8853:5353/udp mstfknn/tor-proxy
 - SOCKS5 proxy on port **9150**
 - DNS over Tor on port **5353** (mapped to host **8853**)
 - Configurable via environment variables
-- Tor Bridge support (obfs4, meek)
+- Tor Bridge support via `-bridge` tags (obfs4, meek)
 - Exit node country selection
 - Built-in healthcheck
 - Runs as non-root user
@@ -57,12 +57,15 @@ docker run -d -p 9150:9150 \
 ```
 
 ### With bridge (censored networks)
+
+Use the `-bridge` tagged images which include `obfs4proxy`:
+
 ```bash
 docker run -d -p 9150:9150 \
   -e USE_BRIDGE=true \
   -e BRIDGE_TYPE=obfs4 \
   -e BRIDGE_LINES="obfs4 1.2.3.4:443 FINGERPRINT cert=... iat-mode=0" \
-  mstfknn/tor-proxy:debian
+  mstfknn/tor-proxy:debian-bridge
 ```
 
 ### With persistent data
@@ -96,14 +99,14 @@ Configure your application to use the SOCKS5 proxy at `localhost:9150` and verif
 curl --socks5-hostname localhost:9150 https://check.torproject.org/api/ip
 ```
 
-## Alpine Variant
+## Available Tags
 
-For a smaller image:
-
-```bash
-docker pull mstfknn/tor-proxy:alpine
-docker run -d -p 9150:9150 -p 8853:5353/udp mstfknn/tor-proxy:alpine
-```
+| Tag | Description |
+|-----|-------------|
+| `debian`, `latest` | Debian-based, standard |
+| `alpine` | Alpine-based, minimal |
+| `debian-bridge` | Debian + obfs4proxy (bridge support) |
+| `alpine-bridge` | Alpine + obfs4proxy (bridge support) |
 
 ## GitHub
 

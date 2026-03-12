@@ -1,7 +1,7 @@
 FROM alpine:latest
 
-# Tor kurulumu
-RUN apk add --no-cache tor && \
+# Tor ve bridge desteği kurulumu
+RUN apk add --no-cache tor obfs4proxy && \
     rm -rf /var/cache/apk/*
 
 # Entrypoint script

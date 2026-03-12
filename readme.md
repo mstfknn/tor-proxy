@@ -63,6 +63,13 @@ docker pull mstfknn/tor-proxy:debian
 docker pull mstfknn/tor-proxy:alpine
 ```
 
+For bridge support (obfs4, meek):
+
+```sh
+docker pull mstfknn/tor-proxy:debian-bridge
+docker pull mstfknn/tor-proxy:alpine-bridge
+```
+
 **GitHub Container Registry (GHCR)**
 
 ```sh
@@ -123,14 +130,14 @@ docker run -d --name tor-proxy -p 9150:9150 \
 
 ### Tor Bridge (Censored Networks)
 
-For networks where Tor is blocked, use bridges:
+For networks where Tor is blocked, use the `-bridge` tagged images which include `obfs4proxy`:
 
 ```sh
 docker run -d --name tor-proxy -p 9150:9150 \
   -e USE_BRIDGE=true \
   -e BRIDGE_TYPE=obfs4 \
   -e BRIDGE_LINES="obfs4 1.2.3.4:443 FINGERPRINT cert=... iat-mode=0" \
-  mstfknn/tor-proxy:debian
+  mstfknn/tor-proxy:debian-bridge
 ```
 
 You can get bridge addresses from [https://bridges.torproject.org](https://bridges.torproject.org).
