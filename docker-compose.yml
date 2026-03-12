@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   tor-proxy:
     image: mstfknn/tor-proxy:debian # or ghcr.io/mstfknn/tor-proxy:debian
@@ -7,4 +5,16 @@ services:
     restart: unless-stopped
     ports:
       - "9150:9150" # SOCKS5 Proxy
-      - "8853:53/udp" # DNS Proxy
+      - "8853:5353/udp" # DNS Proxy
+    volumes:
+      - tor-data:/var/lib/tor
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.5'
+
+volumes:
+  tor-data:

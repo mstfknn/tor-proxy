@@ -1,15 +1,17 @@
 FROM alpine:latest
 
-# Install Tor (no cache + clean up)
-RUN apk add --no-cache tor && \
+# Tor ve bridge desteği kurulumu
+RUN apk add --no-cache tor obfs4proxy && \
     rm -rf /var/cache/apk/*
 
-# Copy tor config
-COPY torrc /etc/tor/torrc
+# Entrypoint script
+COPY --chmod=755 docker-entrypoint.sh /usr/local/bin/
 
-# Expose ports
 EXPOSE 9150
-EXPOSE 53/udp
+EXPOSE 5353/udp
 
-# Run Tor with provided config, suppress logs
-CMD ["sh", "-c", "tor -f /etc/tor/torrc > /dev/null 2>&1"]
+HEALTHCHECK --interval=60s --timeout=15s --start-period=30s --retries=3 \
+  CMD nc -z 127.0.0.1 9150 || exit 1
+
+USER tor
+ENTRYPOINT ["docker-entrypoint.sh"]

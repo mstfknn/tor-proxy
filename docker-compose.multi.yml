@@ -1,0 +1,50 @@
+services:
+  tor-1:
+    image: mstfknn/tor-proxy:debian
+    restart: unless-stopped
+    volumes:
+      - tor-data-1:/var/lib/tor
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.5'
+
+  tor-2:
+    image: mstfknn/tor-proxy:debian
+    restart: unless-stopped
+    volumes:
+      - tor-data-2:/var/lib/tor
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.5'
+
+  tor-3:
+    image: mstfknn/tor-proxy:debian
+    restart: unless-stopped
+    volumes:
+      - tor-data-3:/var/lib/tor
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.5'
+
+  haproxy:
+    image: haproxy:alpine
+    restart: unless-stopped
+    ports:
+      - "9150:9150"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - tor-1
+      - tor-2
+      - tor-3
+
+volumes:
+  tor-data-1:
+  tor-data-2:
+  tor-data-3:
